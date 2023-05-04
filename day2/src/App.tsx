@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Item from "./Item";
 import Todoinput from "./Todoinput";
@@ -86,7 +86,7 @@ function App() {
           index === targetid ? { ...e, value: form.input } : e
         )
       );
-      setForm((prev) => ({ input: "", value: "THÊM" }));
+      setForm({ input: "", value: "THÊM" });
     }
   };
 
@@ -110,9 +110,9 @@ function App() {
     <Item
       value={e.value}
       check={e.check}
-      onClick={handleItem}
+      onChange={handleItem}
       key={index}
-      id={index}
+      some={index}
       onDelete={handleDelete}
       onFix={handleFix}
       visible={e.visible}

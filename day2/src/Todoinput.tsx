@@ -14,7 +14,7 @@ interface Todoinputprops {
    * update two way binding
    * @returns void
    */
-  onChange: (target: string) => void;
+  onChange: (target: React.ChangeEvent<HTMLInputElement>) => void;
   /**
    * text of button
    */

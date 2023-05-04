@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 interface FilterProps {
   /**
@@ -6,8 +6,17 @@ interface FilterProps {
    * @returns void
    */
   onChange: (label:string) => void;
+  /**
+   * name of label
+   */
   label: string;
+  /**
+   * value of label
+   */
   value: string;
+  /**
+   * check or not
+   */
   check:boolean;
 }
 
