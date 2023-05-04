@@ -1,30 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import Button from "./Button";
-import PropTypes from "prop-types";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const handleAdd = () => {
-    setCount((prev) => prev + 1 )
-  }
-
-  const handleReset = () => {
-    setCount(0)
-  }
-
-  const handleSubtract = () => {
-    setCount((prev) => prev - 1)
-  }
-
-
+  const [products, setproducts] = useState([]);
+  useEffect(() => {
+    const getProduct = async () => {
+      const res = await fetch("https://dummyjson.com/users");
+      const data = await res.json();
+      setproducts(data.users);
+    };
+    getProduct();
+  }, []);
+  console.log(products);
   return (
-    <div>
-      <h1>{count}</h1>
-      <Button onClick={handleAdd} title="Add" />
-      <Button onClick={handleReset} title="Reset" />
-      <Button onClick={handleSubtract} title="Subtract" />
-    </div>
+    <table id="customers">
+      <tr>
+        <th>Firs tName</th>
+        <th>Last Name</th>
+        <th>Adress</th>
+        <th>Email</th>
+      </tr>
+      {products.map((e) => (
+        <tr key={e.id} className="info">
+          <td>{e.firstName}</td>
+          <td>{e.lastName}</td>
+          <td>{e.address.address}</td>
+          <td>{e.email}</td>
+        </tr>
+      ))}
+    </table>
   );
 }
 
