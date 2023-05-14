@@ -1,8 +1,10 @@
-import { useState } from "react";
-import "./App.css";
+import { useState, useRef, RefObject, useEffect } from "react";
 import Item from "./Item";
 import Todoinput from "./Todoinput";
 import Filter from "./Filter";
+import "./App.css";
+
+console.log(Filter);
 
 let targetid: number;
 
@@ -24,10 +26,17 @@ interface FilterState {
 }
 
 function App() {
+  const inputRef: RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
+
   const [form, setForm] = useState<FormState>({
     input: "",
     value: "THÊM",
   });
+
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus();
+  }, [form.input]);
+
   const [data, setData] = useState<DataState[]>([
     {
       check: false,
@@ -155,6 +164,7 @@ function App() {
   return (
     <div className="container">
       <Todoinput
+        ref={inputRef}
         onClick={handleAdd}
         value={form.input}
         onChange={handleForm}

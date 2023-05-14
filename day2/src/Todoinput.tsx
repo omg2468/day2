@@ -1,4 +1,6 @@
 import React from "react";
+import { forwardRef, useRef } from 'react';
+
 
 interface Todoinputprops {
   /**
@@ -21,26 +23,29 @@ interface Todoinputprops {
   text: string;
 }
 
-export default function Todoinput({
-  onClick,
-  value,
-  onChange,
-  text,
-}: Todoinputprops) {
-  return (
-    <div>
-      <div className="todo-input">
-        <input
-          type="text"
-          placeholder="Nhập công việc"
-          id="todo-input"
-          value={value}
-          onChange={onChange}
-        />
-        <button id="btn-add" onClick={onClick}>
-          {text}
-        </button>
-      </div>
-    </div>
-  );
-}
+ function Todoinput(
+   props: Todoinputprops,
+   ref: React.LegacyRef<HTMLInputElement>
+ ) {
+   const { onClick, value, onChange, text } = props;
+
+   return (
+     <div>
+       <div className="todo-input">
+         <input
+           type="text"
+           placeholder="Nhập công việc"
+           id="todo-input"
+           value={value}
+           onChange={onChange}
+           ref={ref}
+         />
+         <button id="btn-add" onClick={onClick}>
+           {text}
+         </button>
+       </div>
+     </div>
+   );
+ }
+
+export default forwardRef(Todoinput);

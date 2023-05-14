@@ -1,7 +1,8 @@
-import React from "react";
+import React, { forwardRef  } from "react";
 import "./item.css";
 
-interface Itemprops {
+
+interface ItemProps {
   /**
    * true if check is tick
    */
@@ -35,15 +36,10 @@ interface Itemprops {
   visible: boolean;
 }
 
-export default function Item({
-  check,
-  value,
-  onChange,
-  some,
-  onDelete,
-  onFix,
-  visible,
-}: Itemprops) {
+function Item(props: ItemProps, ref: React.LegacyRef<HTMLInputElement>) {
+  const { check, value, onChange, some, onDelete, onFix, visible } = props;
+
+
   return (
     <div className="todo-list" style={{ display: visible ? "block" : "none" }}>
       <div className={check ? "todo-item active-todo" : "todo-item"}>
@@ -53,6 +49,7 @@ export default function Item({
             checked={check}
             onChange={onChange}
             id={some.toString()}
+            ref={ref}
           />
           <p>{value}</p>
         </div>
@@ -73,6 +70,7 @@ export default function Item({
       </div>
     </div>
   );
-}
+};
 
-Item.displayName = "Item";
+ export default forwardRef (Item)
+
