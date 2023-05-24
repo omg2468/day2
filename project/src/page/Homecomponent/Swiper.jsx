@@ -1,27 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from "swiper";
 import "swiper/swiper-bundle.css";
 import "swiper/css/effect-coverflow";
+import { ProviderShow } from "../../component/Layout";
 import parse from "html-react-parser";
-
-// const getProduct = async () => {
-//   const res = await fetch(
-//     `https://api-product-igm3dkn2k-omg2468.vercel.app/product`
-//   );
-//   const data = await res.json();
-//   setLoading(false);
-//   return data;
-// };
 
 export default function Swiperhome() {
   const [data, setData] = useState([]);
   const [load, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   getProduct().then(setData);
-  // }, []);
-
   useEffect(() => {
     const getProduct = async () => {
       const res = await fetch(
@@ -34,6 +22,13 @@ export default function Swiperhome() {
     getProduct();
   }, []);
 
+  const alldata = useContext(ProviderShow);
+
+  const handleData = (id) => {
+    alldata.notify();
+    alldata.handleData(id);
+  };
+
   const formattedNumber = (number) => {
     let value = new Intl.NumberFormat("vi-VN", {
       style: "decimal",
@@ -41,9 +36,6 @@ export default function Swiperhome() {
     }).format(number / 1000);
     return value;
   };
-
-  console.log(load);
-
   const countStar = (star) => {
     let resultStart = "";
     let full;
@@ -96,18 +88,13 @@ export default function Swiperhome() {
             {product.description}
           </div>
           <div className="button-item">
-            <div className="add-number-item">
-              <i className="bi bi-dash-circle" onclick="dash(event)" />
-              <span>1</span>
-              <i className="bi bi-plus-circle" onclick="plus(event)" />
+            <div className="add-item">
+              <button onClick={() => handleData(product.id)}>Thêm vào giỏ</button>
             </div>
-            <div className="add-item" onclick="orderbox(event)">
-              <button>Thêm vào giỏ</button>
-            </div>
-            <div className="buy-now">
-              <a href="/cart">
+            <div className="buy-nows">
+              <Link to="/cart">
                 <button>Mua ngay</button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -127,6 +114,7 @@ export default function Swiperhome() {
           <h1>Loading</h1>
         ) : (
           <Swiper
+            allowTouchMove={true}
             centeredSlides={true}
             spaceBetween={0}
             slidesPerView={1}
@@ -141,7 +129,7 @@ export default function Swiperhome() {
               modifier: 2,
             }}
             autoplay={{
-              delay: 1000,
+              delay: 4000,
             }}
             breakpoints={{
               "@0.4": {

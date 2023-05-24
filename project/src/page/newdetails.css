@@ -57,3 +57,12 @@ figcaption {
   margin-bottom: 10px;
   font-size: small;
 }
+
+.box_newest_news p {
+  line-height: 20px;
+  height: 60px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}

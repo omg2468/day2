@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Centercart from "./Checkoutcomponent/Centercart";
-import Modal1 from "./Checkoutcomponent/Modal1";
-import Modal2 from "./Checkoutcomponent/Modal2";
-import "./checkout.css"
+
+import "./checkout.css";
 
 export default function Checkout() {
-  return (
-    <div>
-      <Modal1 />
-      <Modal2 />
-      <Centercart />
-    </div>
-  );
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+  return <Centercart />;
 }

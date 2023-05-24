@@ -3,8 +3,13 @@ import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 import Formcake from "./Formcake";
 import Formdiscount from "./Formdiscount";
+import { useSearchParams } from "react-router-dom";
 
 export default function Menuright() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const handleClick = () => {
+    setSearchParams("")
+  };
   return (
     <div className="col-lg-3 position-relative">
       <div className="menu_right position-sticky">
@@ -12,9 +17,8 @@ export default function Menuright() {
           <div className="header_filter">
             <i className="bi bi-funnel-fill" style={{ color: "red" }} />{" "}
             <span>Bộ lọc</span>
-            <i className="bi bi-chevron-down" />
           </div>
-          <Button className="btn btn-danger" disabled>
+          <Button className="btn btn-danger" onClick={handleClick}>
             Bỏ lọc
           </Button>
         </div>
@@ -31,11 +35,6 @@ export default function Menuright() {
               <Formdiscount />
             </Accordion.Body>
           </Accordion.Item>
-          <div className="filter_button text-center">
-            <Button className="btn btn-danger" disabled>
-              Áp dụng
-            </Button>
-          </div>
         </Accordion>
       </div>
     </div>

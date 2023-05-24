@@ -35,6 +35,10 @@
   vertical-align: middle;
 }
 
+.box-number {
+  justify-content: center;
+}
+
 .box-number input {
   max-width: 50px;
   text-align: center;
@@ -50,6 +54,10 @@
 .container-cart .number_item .close_item .bi-x {
   cursor: pointer;
   color: red;
+}
+
+.name-item-check {
+  width: 60%;
 }
 
 .total_price {
@@ -68,6 +76,8 @@
 
 .box-total-price .item-total-money {
   margin-bottom: 10px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.221);
 }
 
 .box-total-price {
@@ -123,6 +133,14 @@
   text-align: center;
   width: 25px;
   margin-left: 3px;
+}
+
+.price-item-2 {
+  align-items: flex-start;
+}
+
+.container-cart h5 {
+  margin-bottom: 30px;
 }
 
 .close_item.cart-2 {

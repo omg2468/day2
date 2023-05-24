@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 export default function Formcake() {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategories = searchParams.getAll("categorycake");
+  const selectedCategorie = searchParams.getAll("categorydiscount");
 
   const categorycake = [
     { value: "cake1", title: "Bánh ngọt" },
@@ -28,32 +29,15 @@ export default function Formcake() {
   const handleForm = (e) => {
     const { checked, value } = e.target;
     if (checked) {
-    setSearchParams((prev) => ({
-      ...prev, // sao chép các giá trị hiện tại của searchParams
-      categorycake: [...selectedCategories, value], // chỉ thay đổi giá trị của thuộc tính categorycake
-    }));
+      searchParams.append("categorycake", value);
+      setSearchParams(searchParams);
     } else {
-      setSearchParams((prev) => ({
-        ...prev,
+      setSearchParams({
+        categorydiscount: selectedCategorie,
         categorycake: selectedCategories.filter((item) => item !== value),
-      }));
+      });
     }
   };
 
-  return (
-    <Form onChange={handleForm}>
-      {/* <input type="checkbox" id="cake1" name="cake1" defaultValue="cake1" />
-      <label htmlFor="cake1">Bánh ngọt</label>
-      <br />
-      <input type="checkbox" id="cake2" name="cake2" defaultValue="cake2" />
-      <label htmlFor="cake2">Bánh mặn</label>
-      <br />
-      <input type="checkbox" id="cake3" name="cake3" defaultValue="cake3" />
-      <label htmlFor="cake3">Bánh mì</label>
-      <br />
-      <input type="checkbox" id="cake4" name="cake4" defaultValue="cake4" />
-      <label htmlFor="cake4">Bánh kem</label> <br /> */}
-      {listForm}
-    </Form>
-  );
+  return <Form onChange={handleForm}>{listForm}</Form>;
 }

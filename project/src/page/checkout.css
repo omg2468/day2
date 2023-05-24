@@ -98,6 +98,7 @@
   font-size: 45px;
   display: flex;
   justify-content: space-evenly;
+  height: 55px;
 }
 
 .number_visa .section_zero {
@@ -274,8 +275,8 @@
   margin-top: 80px;
 }
 
-input[type="text"],
-input[type="tel"] {
+.user_info input[type="text"],
+.user_info input[type="tel"] {
   width: 100%;
 }
 
@@ -285,14 +286,8 @@ input[type="tel"] {
   width: 100%;
 }
 
-#districts,
-#wards {
-  display: none;
-}
-
 .container.cart textarea {
   margin-bottom: 30px;
-
 }
 
 .container.cart textarea::placeholder {
@@ -317,7 +312,7 @@ input[type="tel"] {
   outline: 3px solid rgb(170, 170, 247);
 }
 
-.form-check {
+.form-check-out {
   border-radius: 10px;
   border: 1px solid rgba(14, 0, 0, 0.295);
   padding-left: 0;
@@ -329,21 +324,21 @@ input[type="tel"] {
   margin-bottom: 15px;
 }
 
-.form-check:active {
+.form-check-out:active {
   outline: 3px solid rgb(170, 170, 247);
 }
 
-.form-check label {
+.form-check-out label {
   margin-left: 10px;
 }
 
-.form-check .form_text .img_form {
+.form-check-out .form_text .img_form {
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.form-check .form-check-input {
+.form-check-out .form-check-input {
   margin-left: 10px;
 }
 

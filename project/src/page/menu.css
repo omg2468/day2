@@ -49,6 +49,29 @@
   }
 }
 
+.toast-body {
+  padding: 5px;
+}
+
+.toast {
+  text-align: center;
+  width: fit-content;
+}
+
+.toast svg {
+  margin-left: 3px;
+}
+
+.container-toast {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #00000058;
+}
+
 /* menu */
 
 .container.menu {
@@ -94,7 +117,7 @@
 }
 
 .container_menu_items {
-  margin-top: 29px;
+  margin-top: 33px;
 }
 
 .container_menu_items .menu_item {
@@ -121,10 +144,11 @@
 }
 
 .container_menu_items .name_item {
-  font-size: 27px;
+  font-size: 18px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .container_menu_items .box_items {
@@ -136,6 +160,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+form.d-flex.align-items-center {
+  margin-top: 4px;
+  margin-left: 10px;
 }
 
 @media (max-width: 768px) {
@@ -167,9 +196,15 @@
   overflow: hidden;
 }
 
-.container_menu_items .box_items i {
+.container_menu_items .box_items .star_item i {
   color: var(--red-color);
   font-size: 25px;
+}
+
+.container_menu_items .box_items .price_item .real-price {
+  color: red;
+  font-weight: 500;
+  margin-left: 5px;
 }
 
 .container_menu_items .box_items img {
@@ -177,6 +212,7 @@
   height: 100%;
   border-radius: 10px;
 }
+
 
 .container_menu_items .real_price.discounts {
   font-style: italic;
@@ -212,45 +248,4 @@
 
 .price_sort label {
   margin-right: 10px;
-}
-
-.order_box {
-  position: fixed;
-  bottom: 30px;
-  right: 20px;
-  z-index: 999;
-  border: 3px solid rgb(25, 253, 25);
-  padding: 10px;
-  background-color: white;
-  animation: movebox 0.5s ease-in forwards,
-    movebox-static 1.5s ease-in 0.5s forwards;
-  border-radius: 10px;
-}
-
-@keyframes movebox {
-  0% {
-    bottom: 30px;
-    display: block;
-    visibility: visible;
-  }
-
-  100% {
-    bottom: 80px;
-  }
-}
-
-@keyframes movebox-static {
-  0% {
-    bottom: 80px;
-  }
-
-  100% {
-    bottom: 80px;
-    display: none;
-    visibility: hidden;
-  }
-}
-
-.order_box i {
-  color: green;
 }

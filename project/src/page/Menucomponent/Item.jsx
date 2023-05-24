@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import parse from "html-react-parser";
+import { Button } from "react-bootstrap";
+import { ProviderShow } from "../../component/Layout";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-export default function Item({ name, price, image, star, discount }) {
+export default function Item({ name, price, image, star, discount, id }) {
   const formattedNumber = (number) => {
     let value = new Intl.NumberFormat("vi-VN", {
       style: "decimal",
@@ -9,6 +13,13 @@ export default function Item({ name, price, image, star, discount }) {
     }).format(number / 1000);
     return value;
   };
+
+  const handleData = () => {
+    alldata.notify();
+    alldata.handleData(id);
+  };
+
+  const alldata = useContext(ProviderShow);
 
   const countStar = (star) => {
     let resultStart = "";
@@ -35,7 +46,13 @@ export default function Item({ name, price, image, star, discount }) {
   };
 
   return (
-    <div className="box_items position-relative" data-sort={sort}>
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      layout
+      className="box_items position-relative"
+    >
       <div
         className="discount position-absolute"
         style={{ display: discount ? "" : "none" }}
@@ -43,29 +60,26 @@ export default function Item({ name, price, image, star, discount }) {
         {discount}%
       </div>
       <div className="img_item">
-        <a href="detail_item.html?id=1">
+        <Link to={`/detail/${id}`}>
           <img src={image} alt={name} />
-        </a>
+        </Link>
       </div>
       <div className="name_item">{name}</div>
       <div className="price_item d-flex justify-content-center">
-        <div className={discount ? "real_price discounts" : "real_price"}>
-          {formattedNumber(price)} VNĐ
-        </div>
-        <div
-          className="discount_price"
-          style={{ display: discount ? "block" : "none" }}
-        >
+        <del style={{ display: discount ? "block" : "none" }}>
+          <i>{formattedNumber(price)} VNĐ</i>
+        </del>
+        <div className="real-price">
           {formattedNumber((price * (100 - discount)) / 100)}
           VNĐ
         </div>
       </div>
       <div className="star_item">{countStar(star)}</div>
       <div className="button_oder">
-        <button type="button" className="btn btn-danger">
-          Đặt hàng ngay
-        </button>
+        <Button className="btn btn-danger" onClick={handleData}>
+          Thêm vào giỏ hàng
+        </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }

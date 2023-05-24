@@ -1,5 +1,5 @@
-import React from 'react'
-import "./newdetails.css"
+import React, { useEffect } from "react";
+import "./newdetails.css";
 import newdetail from "../component/images/new_details.jpg";
 import newdetails2 from "../component/images/new_details2.jpg";
 import newdetails3 from "../component/images/new_details3.jpg";
@@ -8,8 +8,11 @@ import banhngot1 from "../component/images/banhngot1.jpg";
 import banhngot5 from "../component/images/banhngot5.jpg";
 import banhman3 from "../component/images/banhman3.png";
 
-
 export default function Newdetails() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="container-fluid new_details">
       <div className="row">
@@ -138,10 +141,7 @@ export default function Newdetails() {
                   <img src={banhngot1} alt="banhkem2" />
                 </div>
                 <div className="box_new_details_text">
-                  <h6>
-                    Những món mới hút khách trong Covid-19 ở Việt Nam và thế
-                    giới
-                  </h6>
+                  <h6>Những món mới hút khách trong Covid-19 ở Việt Nam</h6>
                   <p>
                     Trong danh sách 100 loại bánh ngọt nổi tiếng thế giới, bánh
                     da lợn của Việt Nam nằm ở vị trí 96.

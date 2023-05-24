@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./news.css";
 import banhmi5 from "../component/images/banhmi5.jpg";
 import banhman3 from "../component/images/banhman3.png";
@@ -12,6 +12,10 @@ import banhngot4 from "../component/images/banhngot4.jpg";
 import Boxnew from "../component/Box-new";
 
 export default function News() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+
   return (
     <div className="new_details">
       <h2>Tin tức</h2>

@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom";
 export default function Formdiscount() {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategorie = searchParams.getAll("categorydiscount");
+  const selectedCategories = searchParams.getAll("categorycake");
 
   const categorydiscount = [
     {
@@ -24,26 +25,24 @@ export default function Formdiscount() {
       checked={selectedCategorie.includes(data.value)}
       value={data.value}
       label={data.title}
-      key={index + 1}
+      key={index + 6}
       id={data.value}
     />
   ));
 
   const handleForm = (e) => {
     const { value, checked } = e.target;
+    console.log(value, checked);
     if (checked) {
-      setSearchParams((prev) => ({
-        ...prev, // sao chép các giá trị hiện tại của searchParams
-        categorydiscount: [...selectedCategorie, value], // chỉ thay đổi giá trị của thuộc tính categorydiscount
-      }));
+      searchParams.append("categorydiscount", value);
+      setSearchParams(searchParams);
     } else {
-      setSearchParams((prev) => ({
-        ...prev,
+      setSearchParams({
+        categorycake: selectedCategories,
         categorydiscount: selectedCategorie.filter((item) => item !== value),
-      }));
+      });
     }
   };
-
 
   return <Form onChange={handleForm}>{listForm}</Form>;
 }

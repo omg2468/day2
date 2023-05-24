@@ -11,8 +11,8 @@ import News from "./page/News.jsx";
 import Layout from "./component/Layout.jsx";
 import Newdetails from "./page/Newdetails.jsx";
 import Checkout from "./page/Checkout.jsx";
-import "./main.css"
-
+import DetailItem from "./page/DetailItem";
+import "./main.css";
 
 const router = createBrowserRouter([
   {
@@ -22,9 +22,12 @@ const router = createBrowserRouter([
       { path: "/cart", element: <Cart /> },
       { path: "/cart/checkout", element: <Checkout /> },
       { path: "/contact", element: <Contact /> },
+      { path: "/menu", element: <Menu /> },
+
       { path: "/menu/:pagenumber", element: <Menu /> },
       { path: "/new", element: <News /> },
       { path: "/new/newdetails", element: <Newdetails /> },
+      { path: "/detail/:iditem", element: <DetailItem /> },
     ],
   },
 ]);

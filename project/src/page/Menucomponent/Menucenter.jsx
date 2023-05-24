@@ -9,14 +9,15 @@ import {
 } from "react-router-dom";
 import Item from "./Item";
 import Option from "./Option";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Menucenter() {
   const [filterdata, setFilterdata] = useState([]);
   const [stateoption, setStateoption] = useState("default");
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams.toString());
   const selectedCategories = searchParams.getAll("categorycake");
   const selectDiscount = searchParams.getAll("categorydiscount");
+  const search = searchParams.getAll("search");
   const location = useLocation();
   const navigate = useNavigate();
   const option = [
@@ -52,28 +53,48 @@ export default function Menucenter() {
   useEffect(() => {
     getProduct();
   }, []);
+  let { pagenumber } = useParams();
+  console.log(pagenumber);
 
-  const { pagenumber } = useParams();
+  console.log(
+    filterdata.filter((data) => data.name.toLowerCase().includes(search))
+  );
 
   let dataItem = (
     selectedCategories.length == 0
       ? filterdata
       : filterdata.filter((data) => selectedCategories.includes(data.sort))
-  ).map((product, index) =>
-    index < pagenumber * 12 && index >= (pagenumber - 1) * 12 ? (
-      <Item
-        name={product.name}
-        price={product.price}
-        image={product.image}
-        star={product.star}
-        discount={product.discount}
-        key={product.id}
-        sort={product.sort}
-      />
-    ) : (
-      ""
+  )
+    .filter((data) =>
+      selectDiscount.length !== 1
+        ? data
+        : selectDiscount[0] === "nodiscount"
+        ? data.discount == 0
+        : data.discount > 0
     )
-  );
+    .filter((data) =>
+      search.length !== 0 ? data.name.toLowerCase().includes(search) : data
+    )
+    .map((product, index) =>
+      index < pagenumber * 12 && index >= (pagenumber - 1) * 12 ? (
+        <Item
+          name={product.name}
+          price={product.price}
+          image={product.image}
+          star={product.star}
+          discount={product.discount}
+          key={product.id}
+          id={product.id}
+        />
+      ) : (
+        ""
+      )
+    );
+
+  if (!pagenumber || (dataItem.length < 12 && pagenumber != 1)) {
+    navigate(`menu/1${location.search}`);
+  }
+
   const listOption = option.map((option, index) => (
     <Option title={option.title} value={option.value} key={index} />
   ));
@@ -91,8 +112,6 @@ export default function Menucenter() {
     );
   };
 
-
-
   return (
     <div className="col-lg-9 col-12">
       <div className="price_sort mb-3">
@@ -107,7 +126,9 @@ export default function Menucenter() {
         </select>
       </div>
       <div className="container_menu_items">
-        <div className="menu_item d-flex">{dataItem}</div>
+        <motion.div layout className="menu_item d-flex">
+          <AnimatePresence>{dataItem}</AnimatePresence>
+        </motion.div>
         <nav aria-label="Page navigation example">
           <ul className="pagination justify-content-center">
             <li className="page-item">
@@ -144,7 +165,7 @@ export default function Menucenter() {
                 onClick={() => {
                   navigate(`/menu/2${location.search}`);
                 }}
-                style={{ display: dataItem.length >= 12 ? "block" : "none" }}
+                style={{ display: dataItem.length > 12 ? "block" : "none" }}
               >
                 2
               </Link>

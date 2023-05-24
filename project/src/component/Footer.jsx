@@ -75,7 +75,7 @@ export default function Footer() {
             </div>
             <div className="adress_1">Cơ sở 1</div>
             <div className="adress_phone">
-              <a href="tel:0336852269">Điện thoại:0336852269</a>
+              <a href="tel:0336852269">Điện thoại: 0336852269</a>
             </div>
             <div className="adress_detail">
               <a href="https://goo.gl/maps/SvtAukycHgZrANXw7">
@@ -85,7 +85,7 @@ export default function Footer() {
             </div>
             <div className="adress_1">Cơ sở 2</div>
             <div className="adress_phone">
-              <a href="tel:0336852268">Điện thoại:0336852268</a>
+              <a href="tel:0336852268">Điện thoại: 0336852268</a>
             </div>
             <div className="adress_detail">
               <a href="https://goo.gl/maps/NVpy2xAqN1EK7SkF7">
